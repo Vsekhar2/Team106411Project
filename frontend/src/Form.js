@@ -60,6 +60,8 @@ export default class Form extends React.Component {
             <button onClick={e => this.onSubmit(e)}>Query</button>
             <button onClick={e => this.onSubmit(e)}>Update</button>
             <button onClick={e => this.onSubmit(e)}>Delete</button>
+            {/* TODO: Separate button operations */}
+            {/* TODO: Experience UI etc. */}
 
        </form>
 

@@ -3,4 +3,6 @@ from . import views
 
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
+	path('user-insert/', views.userInsert, name="user-insert"),
+	# TODO: api address for other operations
 ]

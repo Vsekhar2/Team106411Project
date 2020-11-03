@@ -38,9 +38,17 @@ class App extends Component {
 
   onSubmit = fields => {
 
-    this.setState({ fields });
+    this.setState({ fields }, () => {
+      let sendData = JSON.stringify(this.state.fields)
+      axios.post("http://127.0.0.1:8000/api/user-insert/", sendData)
+        .then((response) => {
+          console.log("Returned response from Django: " + response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    });
     console.log("App Component got: ", fields);
-
 
   }
 
