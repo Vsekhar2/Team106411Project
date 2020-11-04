@@ -31,8 +31,6 @@ def userInsert(request):
     cursor.execute(rawSql)
     return Response("User data received, sending from Django REST Framework.")
 
-
-
 # TODO: Update, Delete, Query for Users
 @api_view(['POST'])
 def userDelete(request):
@@ -43,6 +41,7 @@ def userDelete(request):
         cursor = connection.cursor()
         cursor.execute('DELETE FROM user WHERE name = %s', [myName])
         return Response("User Delete")
+
 @api_view(['POST'])
 def userUpdate(request):
     data = json.loads(request.body)
@@ -52,9 +51,5 @@ def userUpdate(request):
     cursor = connection.cursor()
     cursor.execute("UPDATE user SET name = %s, age = %s WHERE id = %s", [myName, myAge, userId])
     return Response("Update Row")
-
-
-
-
 
 # TODO: Other tables
