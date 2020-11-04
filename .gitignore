@@ -1,5 +1,5 @@
 /**/*.pyc
 *.pyc
-/backend/.vscode
-/backend/**/migrations
-/backend/**/__pycache__
+/backend/.vscode/
+/migrations
+__pycache__/
