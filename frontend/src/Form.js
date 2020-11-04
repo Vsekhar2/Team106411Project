@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class Form extends React.Component {
    state = {
@@ -13,7 +14,7 @@ export default class Form extends React.Component {
 
    onSubmit = (e) => {
       e.preventDefault();
-      this.props.onSubmit(this.state)
+      this.props.onSubmit(this.state);
       this.setState({
 
         Name: "",
@@ -23,6 +24,78 @@ export default class Form extends React.Component {
 
       })
       console.log(this.state);
+
+
+   };
+
+   //On Delete function
+   onDelete = (e) => {
+     console.log("On Delete");
+     e.preventDefault();
+     //this.props.onSubmit(this.state)
+     console.log(this.state);
+
+
+      let sendData = JSON.stringify(this.state)
+      axios.post("http://127.0.0.1:8000/api/user-delete/", sendData)
+        .then((response) => {
+           console.log("Returned response from Django: " + response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+       })
+
+     console.log("Deleted specific userId: ", this.state);
+
+
+
+
+   };
+
+   //On Update Function
+   onUpdate = (e) => {
+     console.log("On Update");
+     e.preventDefault();
+     //this.props.onSubmit(this.state)
+     console.log(this.state);
+
+
+      let sendData = JSON.stringify(this.state)
+      axios.post("http://127.0.0.1:8000/api/user-update/", sendData)
+        .then((response) => {
+           console.log("Returned response from Django: " + response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+       })
+
+     console.log("Deleted specific userId: ", this.state);
+
+
+
+
+   };
+
+   //On Query Function
+   onQuery = (e) => {
+     console.log("On Update");
+     e.preventDefault();
+     //this.props.onSubmit(this.state)
+     console.log(this.state);
+
+
+      let sendData = JSON.stringify(this.state)
+      axios.post("http://127.0.0.1:8000/api/user-update/", sendData)
+        .then((response) => {
+           console.log("Returned response from Django: " + response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+       })
+
+     console.log("Deleted specific userId: ", this.state);
+
+
 
 
    };
@@ -58,8 +131,8 @@ export default class Form extends React.Component {
             <br />
             <button onClick={e => this.onSubmit(e)}>Insert</button>
             <button onClick={e => this.onSubmit(e)}>Query</button>
-            <button onClick={e => this.onSubmit(e)}>Update</button>
-            <button onClick={e => this.onSubmit(e)}>Delete</button>
+            <button onClick={e => this.onUpdate(e)}>Update</button>
+            <button onClick={e => this.onDelete(e)}>Delete</button>
             {/* TODO: Separate button operations */}
             {/* TODO: Experience UI etc. */}
 

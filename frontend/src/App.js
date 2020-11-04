@@ -36,6 +36,15 @@ class App extends Component {
 
   }
 
+  onDeleteUser = fields => {
+
+
+    console.log("Delete user function called: ", fields);
+
+  }
+
+
+
   onSubmit = fields => {
 
     this.setState({ fields }, () => {
