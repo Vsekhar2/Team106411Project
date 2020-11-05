@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import Form from "./Form";
+import User from "./User";
+import Experience from "./Experience"
+
 
 let dummydata = null;
 
@@ -20,6 +22,7 @@ class App extends Component {
 			.then((response) => {
         console.log(response.data)
         dummydata = JSON.stringify(response.data)
+
         this.setState({
           show: true
         });
@@ -27,7 +30,11 @@ class App extends Component {
 			.catch((error) => {
 				console.log(error)
 			})
+
+
   }
+
+
 
 
   state = {
@@ -36,27 +43,11 @@ class App extends Component {
 
   }
 
-  onDeleteUser = fields => {
 
 
-    console.log("Delete user function called: ", fields);
-
-  }
-
-
-
+  //Called on Submission of Form
   onSubmit = fields => {
 
-    this.setState({ fields }, () => {
-      let sendData = JSON.stringify(this.state.fields)
-      axios.post("http://127.0.0.1:8000/api/user-insert/", sendData)
-        .then((response) => {
-          console.log("Returned response from Django: " + response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    });
     console.log("App Component got: ", fields);
 
   }
@@ -68,7 +59,9 @@ class App extends Component {
         <div className='form-container'>
           {(this.state.show) ? dummydata : null}
         </div>
-        <Form onSubmit={fields => this.onSubmit(fields)} />
+        <User onSubmit={fields => this.onSubmit(fields)} />
+        <br />
+        <Experience onSubmit={fields => this.onSubmit(fields)} />
         <p>
         {JSON.stringify(this.state.fields, null, 2)}
         </p>

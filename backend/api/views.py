@@ -52,4 +52,11 @@ def userUpdate(request):
     cursor.execute("UPDATE user SET name = %s, age = %s WHERE id = %s", [myName, myAge, userId])
     return Response("Update Row")
 
-# TODO: Other tables
+@api_view(['POST'])
+def userQuery(request):
+    data = json.loads(request.body)
+    userId = data['UserId']
+    cursor = connection.cursor()
+    cursor.execute("Select name,age FROM user WHERE id = %s", [userId])
+    row = cursor.fetchone()
+    return Response(row)
