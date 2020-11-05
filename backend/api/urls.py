@@ -4,10 +4,11 @@ from . import views
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
 	path('user-insert/', views.userInsert, name="user-insert"),
-	# TODO: api address for other operations
 	path('user-delete/', views.userDelete, name="user-delete"),
 	path('user-update/', views.userUpdate, name="user-update"),
 	path('user-query/', views.userQuery, name="user-query"),
+	path('game-insert/', views.gameInsert, name="game-insert"),
+	path('game-update/', views.gameUpdate, name="game-update"),
+	path('game-query/', views.gameQuery, name="game-query")
 	# TODO: api address for other operations
-
 ]

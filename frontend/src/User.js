@@ -110,7 +110,7 @@ export default class User extends React.Component {
 
        })
 
-     console.log("Deleted specific userId: ", this.state);
+     console.log("Updated specific userId: ", this.state);
 
 
 

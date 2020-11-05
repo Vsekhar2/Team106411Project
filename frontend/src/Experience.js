@@ -114,7 +114,7 @@ export default class Experience extends React.Component {
 
   //On Query Function
   onQuery = (e) => {
-    console.log("On Update");
+    console.log("On Query");
     e.preventDefault();
     //this.props.onSubmit(this.state)
     console.log(this.state);
@@ -138,7 +138,7 @@ export default class Experience extends React.Component {
 
       })
 
-    console.log("Deleted specific userId: ", this.state);
+    console.log("Queried specific userId: ", this.state);
 
 
 
@@ -177,7 +177,7 @@ export default class Experience extends React.Component {
 
            <br />
            <button onClick={e => this.onInsert(e)}>Insert</button>
-           <button onClick={e => this.onInsert(e)}>Query</button>
+           <button onClick={e => this.onQuery(e)}>Query</button>
            <button onClick={e => this.onUpdate(e)}>Update</button>
            <button onClick={e => this.onDelete(e)}>Delete</button>
            {/* TODO: Separate button operations */}

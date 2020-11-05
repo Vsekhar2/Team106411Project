@@ -34,13 +34,13 @@ def userInsert(request):
 # TODO: Update, Delete, Query for Users
 @api_view(['POST'])
 def userDelete(request):
-        data = json.loads(request.body)
-        myName = data['Name']
-        age = data['Age']
-        userId = data['UserId']
-        cursor = connection.cursor()
-        cursor.execute('DELETE FROM user WHERE name = %s', [myName])
-        return Response("User Delete")
+    data = json.loads(request.body)
+    myName = data['Name']
+    age = data['Age']
+    userId = data['UserId']
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM user WHERE name = %s', [myName])
+    return Response("User Delete")
 
 @api_view(['POST'])
 def userUpdate(request):
@@ -57,6 +57,40 @@ def userQuery(request):
     data = json.loads(request.body)
     userId = data['UserId']
     cursor = connection.cursor()
-    cursor.execute("Select name,age FROM user WHERE id = %s", [userId])
+    cursor.execute("SELECT name, age FROM user WHERE id = %s", [userId])
     row = cursor.fetchone()
     return Response(row)
+
+@api_view(['POST'])
+def gameInsert(request):
+    data = json.loads(request.body)
+    name = data['Name']
+    price = data['Price']
+    platform = data['Platform']
+    developer = data['Developer']
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO game(name, price, platform, developer) VALUES(%s, %s, %s, %s)", [name, price, platform, developer])
+    return Response("Game inserted")
+
+@api_view(['POST'])
+def gameUpdate(request):
+    data = json.loads(request.body)
+    gameId = data['GameId']
+    name = data['Name']
+    price = data['Price']
+    platform = data['Platform']
+    developer = data['Developer']
+    cursor = connection.cursor()
+    cursor.execute("UPDATE game SET name = %s, price = %s, platform = %s, developer = %s WHERE id = %s", [name, price, platform, developer, gameId])
+    return Response("Update Row")
+
+@api_view(['POST'])
+def gameQuery(request):
+    data = json.loads(request.body)
+    gameId = data['GameId']
+    name = data['Name']
+    price = data['Price']
+    platform = data['Platform']
+    developer = data['Developer']
+    cursor = connection.cursor()
+    cursor.execute("SELECT name, price, platform, developer FROM game WHERE id = %s", [name, price, platform, developer])

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import User from "./User";
-import Experience from "./Experience"
+import Experience from "./Experience";
+import Game from "./Game";
 
 
 let dummydata = null;
@@ -62,6 +63,8 @@ class App extends Component {
         <User onSubmit={fields => this.onSubmit(fields)} />
         <br />
         <Experience onSubmit={fields => this.onSubmit(fields)} />
+        <br />
+        <Game onSubmit={fields => this.onSubmit(fields)} />
         <p>
         {JSON.stringify(this.state.fields, null, 2)}
         </p>
