@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+let myData = null;
 export default class Experience extends React.Component {
   //Data that will be stored in the form and can be used
   state = {
@@ -9,7 +10,8 @@ export default class Experience extends React.Component {
     Name: "",
     Price: "",
     Platform: "",
-    Developer: ""
+    Developer: "",
+    Query: myData
 
   }
 
@@ -81,7 +83,7 @@ export default class Experience extends React.Component {
 
   //On Query Function
   onQuery = (e) => {
-    console.log("On Update");
+    console.log("On Query");
     e.preventDefault();
     //this.props.onSubmit(this.state)
     console.log(this.state);
@@ -91,6 +93,12 @@ export default class Experience extends React.Component {
      axios.post("http://127.0.0.1:8000/api/game-query/", sendData)
        .then((response) => {
           console.log("Returned response from Django: " + response.data)
+          myData = JSON.stringify(response.data)
+          this.setState({
+
+            Query: myData
+          })
+          console.log(myData)
      })
      .catch((error) => {
          console.log(error)
@@ -156,6 +164,12 @@ export default class Experience extends React.Component {
         value = {this.state.Developer}
         onChange={e => this.setState({Developer: e.target.value})}
         />
+
+        <div>
+
+            {this.state.Query}
+
+        </div>
 
         <br />
         <button onClick={e => this.onInsert(e)}>Insert</button>

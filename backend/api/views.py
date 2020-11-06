@@ -88,9 +88,7 @@ def gameUpdate(request):
 def gameQuery(request):
     data = json.loads(request.body)
     gameId = data['GameId']
-    name = data['Name']
-    price = data['Price']
-    platform = data['Platform']
-    developer = data['Developer']
     cursor = connection.cursor()
-    cursor.execute("SELECT name, price, platform, developer FROM game WHERE id = %s", [name, price, platform, developer])
+    cursor.execute("SELECT name, price, platform, developer FROM game WHERE id = %s", [gameId])
+    row = cursor.fetchone()
+    return Response(row)
