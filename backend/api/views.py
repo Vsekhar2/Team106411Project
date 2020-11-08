@@ -92,3 +92,39 @@ def gameQuery(request):
     cursor.execute("SELECT name, price, platform, developer FROM game WHERE id = %s", [gameId])
     row = cursor.fetchone()
     return Response(row)
+@api_view(['POST'])
+def experienceInsert(request):
+    data = json.loads(request.body)
+    myUserId = data['UserId']
+    myGameID = data['GameId']
+    myRatings = data['Ratings']
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO experience(user_id, game_id, rating) VALUES(%s, %s, %s)", [myUserId, myGameID, myRatings])
+    return Response("EXPERIENCE INSERT")
+@api_view(['POST'])
+def experienceDelete(request):
+    data = json.loads(request.body)
+    myUserId = data['UserId']
+    myGameID = data['GameId']
+    myRatings = data['Ratings']
+    cursor = connection.cursor()
+    cursor.execute("Delete from experience where user_id = %s AND game_id = %s", [myUserId, myGameID])
+    return Response("EXPERIENCE DELETE")
+@api_view(['POST'])
+def experienceUpdate(request):
+    data = json.loads(request.body)
+    myUserId = data['UserId']
+    myGameID = data['GameId']
+    myRatings = data['Ratings']
+    cursor = connection.cursor()
+    cursor.execute("Update experience SET rating = %s WHERE user_id = %s AND game_id = %s", [myRatings, myUserId, myGameID])
+    return Response("EXPERIENCE Update")
+@api_view(['POST'])
+def experienceQuery(request):
+    data = json.loads(request.body)
+    myUserId = data['UserId']
+    myGameID = data['GameId']
+    cursor = connection.cursor()
+    cursor.execute("Select rating FROM experience where user_id = %s AND game_id = %s", [myUserId, myGameID])
+    row = cursor.fetchone()
+    return Response(row)

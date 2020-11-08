@@ -9,6 +9,10 @@ urlpatterns = [
 	path('user-query/', views.userQuery, name="user-query"),
 	path('game-insert/', views.gameInsert, name="game-insert"),
 	path('game-update/', views.gameUpdate, name="game-update"),
-	path('game-query/', views.gameQuery, name="game-query")
+	path('game-query/', views.gameQuery, name="game-query"),
+	path('experience-insert/', views.experienceInsert, name="experience-insert"),
+	path('experience-delete/', views.experienceDelete, name="experience-delete"),
+	path('experience-update/', views.experienceUpdate, name="experience-update"),
+	path('experience-query/', views.experienceQuery, name="experience-query"),
 	# TODO: api address for other operations
 ]
