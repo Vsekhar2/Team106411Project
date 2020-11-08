@@ -10,9 +10,9 @@ class User(models.Model):
 
 class Game(models.Model):
     name = models.CharField('Name', max_length = 100, default = '')
-    price = models.FloatField('price', null=False)
-    platform = models.CharField('platform', max_length = 100)
-    developer = models.CharField('developer', max_length = 100)
+    price = models.FloatField('Price', null=False)
+    platform = models.CharField('Platform', max_length = 100)
+    developer = models.CharField('Developer', max_length = 100)
 
     class Meta:
         db_table = 'game'
@@ -21,7 +21,14 @@ class Game(models.Model):
 class Experience(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     game = models.ForeignKey(Game, on_delete = models.CASCADE)
-    rating = models.DecimalField('rating', max_digits=4, decimal_places=2)
+    rating = models.DecimalField('Rating', max_digits=4, decimal_places=2)
 
     class Meta:
         db_table = 'experience'
+    
+class Game_Genre(models.Model):
+    game = models.ForeignKey(Game, on_delete = models.CASCADE)
+    genre_name = models.CharField('Genre_Name', max_length = 100)
+
+    class Meta:
+        db_table = 'game_genre'
