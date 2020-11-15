@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
+	path('game-populate/', views.gamePopulate, name="game-populate"),
 	path('user-insert/', views.userInsert, name="user-insert"),
 	path('user-delete/', views.userDelete, name="user-delete"),
 	path('user-update/', views.userUpdate, name="user-update"),
