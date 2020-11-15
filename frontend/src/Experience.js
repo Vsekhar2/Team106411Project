@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+
+let myData = null;
 export default class Experience extends React.Component {
   //Data that will be stored in the form and can be used
   state = {
@@ -8,6 +10,7 @@ export default class Experience extends React.Component {
     UserId: "",
     GameId: "",
     Ratings: "",
+    myQueryData: myData,
 
 
 
@@ -19,7 +22,7 @@ export default class Experience extends React.Component {
 
 
      let sendData = JSON.stringify(this.state)
-     axios.post("http://127.0.0.1:8000/api/user-insert/", sendData)
+     axios.post("http://127.0.0.1:8000/api/experience-insert/", sendData)
        .then((response) => {
          console.log("Returned response from Django: " + response.data)
        })
@@ -55,7 +58,7 @@ export default class Experience extends React.Component {
      let sendData = JSON.stringify(this.state)
 
      //Send data via API call
-     axios.post("http://127.0.0.1:8000/api/user-delete/", sendData)
+     axios.post("http://127.0.0.1:8000/api/experience-delete/", sendData)
        .then((response) => {
           console.log("Returned response from Django: " + response.data)
      })
@@ -88,7 +91,7 @@ export default class Experience extends React.Component {
 
 
      let sendData = JSON.stringify(this.state)
-     axios.post("http://127.0.0.1:8000/api/user-update/", sendData)
+     axios.post("http://127.0.0.1:8000/api/experience-update/", sendData)
        .then((response) => {
           console.log("Returned response from Django: " + response.data)
      })
@@ -121,9 +124,14 @@ export default class Experience extends React.Component {
 
 
      let sendData = JSON.stringify(this.state)
-     axios.post("http://127.0.0.1:8000/api/user-update/", sendData)
+     axios.post("http://127.0.0.1:8000/api/experience-query/", sendData)
        .then((response) => {
           console.log("Returned response from Django: " + response.data)
+          myData = JSON.stringify(response.data)
+          this.setState({
+
+            myQueryData: myData
+          })
      })
      .catch((error) => {
          console.log(error)
@@ -180,6 +188,12 @@ export default class Experience extends React.Component {
            <button onClick={e => this.onQuery(e)}>Query</button>
            <button onClick={e => this.onUpdate(e)}>Update</button>
            <button onClick={e => this.onDelete(e)}>Delete</button>
+
+           <div>
+
+               {this.state.myQueryData}
+
+           </div>
            {/* TODO: Separate button operations */}
            {/* TODO: Experience UI etc. */}
 
