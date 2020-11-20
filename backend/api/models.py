@@ -10,12 +10,18 @@ class User(models.Model):
 
 class Game(models.Model):
     name = models.CharField('Name', max_length = 100, default = '')
-    price = models.FloatField('Price', null=False)
-    platform = models.CharField('Platform', max_length = 100)
     developer = models.CharField('Developer', max_length = 100)
 
     class Meta:
         db_table = 'game'
+
+class Game_Platform(models.Model):
+    game = models.ForeignKey(Game, on_delete = models.CASCADE)
+    price = models.FloatField('Price', null=False)
+    platform = models.CharField('Platform', max_length = 100)
+
+    class Meta:
+        db_table = 'game_platform'
 
 # TODO: Experience, Game, Game_Genre
 class Experience(models.Model):

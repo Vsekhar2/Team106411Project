@@ -35,7 +35,7 @@ def gamePopulate(request):
         'platforms': '18,1,4',
         'page': 1
     }
-    MAX_PAGE_COUNT = 10
+    MAX_PAGE_COUNT = 30
     gameCounter = 0
     for pageCounter in range(1, MAX_PAGE_COUNT + 1):
         payload['page'] = pageCounter
@@ -50,10 +50,12 @@ def gamePopulate(request):
             gameId = game["id"]
             gameName = game["name"]
             print(str(gameCounter) + ": " + gameName)
-            for genre in game["genres"]:
-                print("    Genre: " + genre["name"])
             r2 = requests.get('https://api.rawg.io/api/games/%s' % str(gameId), params = keyPayload)
             gameDeveloper = r2.json()["developers"][0]["name"] if len(r2.json()["developers"]) > 0 else ""
+
+            g = Game(name=gameName, developer=gameDeveloper)
+            g.save()
+
             platformsList = r2.json()["platforms"]
             storesList = r2.json()["stores"]
 
@@ -75,15 +77,15 @@ def gamePopulate(request):
                             if rSteam.status_code == 200 and rSteam.json()[steamId]["success"] == True:
                                 gamePriceSteam = rSteam.json()[steamId]["data"]["price_overview"]["final"] / 100 if "price_overview" in rSteam.json()[steamId]["data"] else 0.0
                                 print("    Steam price: " + str(gamePriceSteam))
-                                # g = Game(name=gameName, price=gamePriceSteam, platform="PC", developer=gameDeveloper)
-                                # g.save()
+                                g_p = Game_Platform(game=g, price=gamePriceSteam, platform="PC")
+                                g_p.save()
                             else:
-                                # g = Game(name=gameName, price=0.0, platform="PC", developer=gameDeveloper)
-                                # g.save()
+                                g_p = Game_Platform(game=g, price=0.0, platform="PC")
+                                g_p.save()
                                 print("    Steam: Status code not 200")
                     if not hasSteam:
-                        # g = Game(name=gameName, price=0.0, platform="PC", developer=gameDeveloper)
-                        # g.save()
+                        g_p = Game_Platform(game=g, price=0.0, platform="PC")
+                        g_p.save()
                         print("    Does not have Steam version")
 
                 # If platform is PS4
@@ -100,11 +102,11 @@ def gamePopulate(request):
                                 elif "links" in rPS4.json() and len(rPS4.json()["links"]) > 0 and "default_sku" in rPS4.json()["links"][0]:
                                     gamePricePS4 = rPS4.json()["links"][0]["default_sku"]["price"] / 100
                                 print("    PS4 price: " + str(gamePricePS4))
-                                # g = Game(name=gameName, price=gamePricePS4, platform="PS4", developer=gameDeveloper)
-                                # g.save()
+                                g_p = Game_Platform(game=g, price=gamePricePS4, platform="PS4")
+                                g_p.save()
                             else:
-                                # g = Game(name=gameName, price=0.0, platform="PS4", developer=gameDeveloper)
-                                # g.save()
+                                g_p = Game_Platform(game=g, price=0.0, platform="PS4")
+                                g_p.save()
                                 print("    PS4: Status code not 200")
                         
                 # If platform is Xbox One
@@ -115,16 +117,20 @@ def gamePopulate(request):
             if hasXboxOne:
                 if hasPS4:
                     print("    Xbox One price: " + str(gamePricePS4))
-                    # g = Game(name=gameName, price=gamePricePS4, platform="Xbox One", developer=gameDeveloper)
-                    # g.save()
+                    g_p = Game_Platform(game=g, price=gamePricePS4, platform="Xbox One")
+                    g_p.save()
                 elif hasSteam:
                     print("    Xbox One price: " + str(gamePriceSteam))
-                    # g = Game(name=gameName, price=gamePriceSteam, platform="Xbox One", developer=gameDeveloper)
-                    # g.save()
+                    g_p = Game_Platform(game=g, price=gamePriceSteam, platform="Xbox One")
+                    g_p.save()
                 else:
                     print("    Xbox One price: 0.0")
-                    # g = Game(name=gameName, price=0.0, platform="Xbox One", developer=gameDeveloper)
-                    # g.save()
+                    g_p = Game_Platform(game=g, price=0.0, platform="Xbox One")
+                    g_p.save()
+            for genre in game["genres"]:
+                # print("    Genre: " + genre["name"])
+                gen = Game_Genre(game=g, genre_name=genre["name"])
+                gen.save()
 
     return Response("Parse complete")
 
