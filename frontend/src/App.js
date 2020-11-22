@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.scss';
 import User from "./User";
 import Experience from "./Experience";
 import Game from "./Game";
@@ -55,20 +55,37 @@ class App extends Component {
 
   render() {
     return(
-      <div className="dummy">
-        <button onClick={this.ClickHandler}>Show Info!</button>
-        <div className='form-container'>
-          {(this.state.show) ? dummydata : null}
+      <div className="outerWrap">
+        <div className="App">
+          <div className="navBar">
+            <div className="logo">logo</div>
+            <ul>
+            <li>Home</li>
+            <li>Survey</li>
+            <li>Search</li>
+            </ul>
+          </div>
+          <div className="header">header
+            <div className="login">Login / Signup</div>
+          </div>
+
         </div>
-        <User onSubmit={fields => this.onSubmit(fields)} />
-        <br />
-        <Experience onSubmit={fields => this.onSubmit(fields)} />
-        <br />
-        <Game onSubmit={fields => this.onSubmit(fields)} />
-        <p>
-        {JSON.stringify(this.state.fields, null, 2)}
-        </p>
       </div>
+
+      // <div className="dummy">
+      //   <button onClick={this.ClickHandler}>Show Info!</button>
+      //   <div className='form-container'>
+      //     {(this.state.show) ? dummydata : null}
+      //   </div>
+      //   <User onSubmit={fields => this.onSubmit(fields)} />
+      //   <br />
+      //   <Experience onSubmit={fields => this.onSubmit(fields)} />
+      //   <br />
+      //   <Game onSubmit={fields => this.onSubmit(fields)} />
+      //   <p>
+      //   {JSON.stringify(this.state.fields, null, 2)}
+      //   </p>
+      // </div>
 
 
 
