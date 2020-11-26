@@ -23,7 +23,6 @@ class Game_Platform(models.Model):
     class Meta:
         db_table = 'game_platform'
 
-# TODO: Experience, Game, Game_Genre
 class Experience(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     game = models.ForeignKey(Game, on_delete = models.CASCADE)
