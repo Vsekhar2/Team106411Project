@@ -4,7 +4,8 @@ import './App.scss';
 import User from "./User";
 import Experience from "./Experience";
 import Game from "./Game";
-
+import Main from './components/Main';
+import greLogo from './svgs/GRE.png'
 
 let dummydata = null;
 
@@ -58,17 +59,14 @@ class App extends Component {
       <div className="outerWrap">
         <div className="App">
           <div className="navBar">
-            <div className="logo">logo</div>
+            <div className="logo"><img src={greLogo}/></div>
             <ul>
-            <li>Home</li>
+            <li className="active">Home</li>
             <li>Survey</li>
             <li>Search</li>
             </ul>
           </div>
-          <div className="header">header
-            <div className="login">Login / Signup</div>
-          </div>
-
+          <Main />
         </div>
       </div>
 
