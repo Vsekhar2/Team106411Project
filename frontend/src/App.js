@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.scss';
-import User from "./User";
-import Experience from "./Experience";
-import Game from "./Game";
 import Main from './components/Main';
 import NavBar from './components/NavBar';
 
