@@ -11,6 +11,7 @@ class User(models.Model):
 class Game(models.Model):
     name = models.CharField('Name', max_length = 100, default = '')
     developer = models.CharField('Developer', max_length = 100)
+    steamId = models.IntegerField('SteamId', null=False)
 
     class Meta:
         db_table = 'game'

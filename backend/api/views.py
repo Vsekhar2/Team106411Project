@@ -26,10 +26,10 @@ def apiOverview(request):
 @api_view(['GET'])
 def gamePopulate(request):
     keyPayload = {
-        'key': '9e03d751249b478aa0cad2bf1d6d9214'
+        'key': '582e096040d14978ba146b8fee3f7e5b'
     }
     payload = {
-        'key': '9e03d751249b478aa0cad2bf1d6d9214', 
+        'key': '582e096040d14978ba146b8fee3f7e5b', 
         'dates': '2014-01-01,2020-11-14',
         'ordering': '-rating-count',
         'platforms': '18,1,4',
@@ -39,7 +39,7 @@ def gamePopulate(request):
     gameCounter = 0
     for pageCounter in range(1, MAX_PAGE_COUNT + 1):
         payload['page'] = pageCounter
-        r = requests.get('https://api.rawg.io/api/games', params = payload)
+        r = requests.get('https://api.rawg.io/api/games', payload)
         for game in r.json()["results"]:
             gameCounter += 1
             hasSteam = False
@@ -49,16 +49,35 @@ def gamePopulate(request):
             gamePricePS4 = 0.0
             gameId = game["id"]
             gameName = game["name"]
-            print(str(gameCounter) + ": " + gameName)
-            r2 = requests.get('https://api.rawg.io/api/games/%s' % str(gameId), params = keyPayload)
+            r2 = requests.get('https://api.rawg.io/api/games/%s' % str(gameId))
             gameDeveloper = r2.json()["developers"][0]["name"] if len(r2.json()["developers"]) > 0 else ""
-
-            g = Game(name=gameName, developer=gameDeveloper)
-            g.save()
 
             platformsList = r2.json()["platforms"]
             storesList = r2.json()["stores"]
 
+            for i in range(len(platformsList)):
+                platformInfo = platformsList[i]["platform"]
+                if platformInfo["id"] == 4:
+                    for j in range(len(storesList)):
+                        if storesList[j]["store"]["name"] == "Steam":
+                            hasSteam = True
+                            steamUrl = storesList[j]["url"]
+                            steamUrlList = steamUrl.strip().split("/")
+                            if "app" in steamUrlList:
+                                steamId = steamUrl.strip().split("/")[steamUrl.strip().split("/").index("app") + 1]
+                            else:
+                                steamId = steamUrlList[-2]
+                            g = Game(name=gameName, developer=gameDeveloper, steamId=steamId)
+                            g.save()
+                            break
+                    if not hasSteam:
+                        steamId = 0
+                        g = Game(name=gameName, developer=gameDeveloper, steamId=0)
+                        g.save()
+
+            print(str(gameCounter) + ": " + gameName + " (SteamId: " + str(steamId) + ")")
+
+            i = 0
             for i in range(len(platformsList)):
                 platformInfo = platformsList[i]["platform"]
 
@@ -66,7 +85,6 @@ def gamePopulate(request):
                 if platformInfo["id"] == 4:
                     for j in range(len(storesList)):
                         if storesList[j]["store"]["name"] == "Steam":
-                            hasSteam = True
                             steamUrl = storesList[j]["url"]
                             steamUrlList = steamUrl.strip().split("/")
                             if "app" in steamUrlList:
