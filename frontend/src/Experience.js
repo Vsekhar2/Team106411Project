@@ -160,7 +160,6 @@ export default class Experience extends React.Component {
     return (
 
       <form>
-        <label>Experience</label>
         <br />
 
          <input

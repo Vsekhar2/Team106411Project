@@ -5,7 +5,7 @@ let myData = null;
 export default class Experience extends React.Component {
   //Data that will be stored in the form and can be used
   state = {
-    
+
     GameId: "",
     Name: "",
     Price: "",
@@ -128,7 +128,6 @@ export default class Experience extends React.Component {
     return (
 
       <form>
-        <label>Game</label>
 
         <br />
         <input

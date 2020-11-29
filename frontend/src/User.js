@@ -167,9 +167,6 @@ export default class User extends React.Component {
      return (
 
        <form>
-
-
-          <label>User</label>
           <br />
           <input
           placeholder = "Name: "

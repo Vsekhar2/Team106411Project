@@ -11,7 +11,7 @@ const NavBar = () => {
             <li className="active">Home</li>
           </Link>
           <Link to="/Survey">
-            <li>Survey</li>
+            <li >Survey</li>
           </Link>
           <Link to="/Search">
             <li>Search</li>
