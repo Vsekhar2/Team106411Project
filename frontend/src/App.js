@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.scss';
-import User from "./User";
-import Experience from "./Experience";
-import Game from "./Game";
 import Main from './components/Main';
-import greLogo from './svgs/GRE.png'
+import NavBar from './components/NavBar';
 
 let dummydata = null;
 
@@ -58,14 +55,7 @@ class App extends Component {
     return(
       <div className="outerWrap">
         <div className="App">
-          <div className="navBar">
-            <div className="logo"><img src={greLogo}/></div>
-            <ul>
-            <li className="active">Home</li>
-            <li>Survey</li>
-            <li>Search</li>
-            </ul>
-          </div>
+          <NavBar />
           <Main />
         </div>
       </div>
