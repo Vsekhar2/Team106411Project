@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 import HomeContent from '../components/HomeContent';
 import SurveyContent from '../components/SurveyContent';
 import SearchContent from '../components/SearchContent';
@@ -7,10 +8,7 @@ import {Switch, Route} from 'react-router-dom';
 const Main = () => {
   return (
     <div className="main">
-      <div className="header">
-        TODO: Back/Forward Icon and Login
-        <div className="login"></div>
-      </div>
+      <Header />
       <div className="pageContent">
         <Switch>
           <Route path="/" exact component={HomeContent}></Route>
