@@ -158,7 +158,7 @@ def gamePopulate(request):
 
     return Response("Parse complete")
 
-@api_view(['GET'])
+@api_view(['POST'])
 def userRecommendations(request):
     data = json.loads(request.body)
     userId = data['UserId']
@@ -174,7 +174,7 @@ def userRecommendations(request):
         ratings.append(row[1])
 
     recommendedGames = engine.getRecommendations(gameIds, ratings)
-    return response(recommendedGames)
+    return Response(recommendedGames)
 
 @api_view(['POST'])
 def userInsert(request):
