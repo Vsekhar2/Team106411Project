@@ -10,6 +10,12 @@ from api.models import *
 import json
 import requests
 
+import sys
+sys.path.insert(1, '../engine')
+from engine.engine import Engine
+
+engine = Engine(5) # Initialize recommendation engine
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -156,9 +162,19 @@ def gamePopulate(request):
 def userRecommendations(request):
     data = json.loads(request.body)
     userId = data['UserId']
-    gameIds = data['GameIds']
-    ratings = data['Ratings']
-    # TODO: Call recommendation engine and return response
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT game_id, rating FROM experience WHERE user_id = %s", [userId])
+
+    gameIds = []
+    ratings = []
+
+    for row in cursor:
+        gameIds.append(row[0]) 
+        ratings.append(row[1])
+
+    recommendedGames = engine.getRecommendations(gameIds, ratings)
+    return response(recommendedGames)
 
 @api_view(['POST'])
 def userInsert(request):
