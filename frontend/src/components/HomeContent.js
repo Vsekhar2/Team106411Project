@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class HomeContent extends Component {
 
@@ -8,62 +9,52 @@ class HomeContent extends Component {
     this.state = {
       recGameId: 0,
       detail1: {
-        gameId: 0,
-        url: "https://steamcdn-a.akamaihd.net/steam/apps/570/capsule_616x353.jpg?t=1605831017",
-        name: "Dota 2",
+        gameId: 570,
+        name: "Dota_2",
         isSingleplayer: false
       },
       detail2: {
-        gameId: 0,
-        url: "https://steamcdn-a.akamaihd.net/steam/apps/730/capsule_616x353.jpg?t=1605831017",
+        gameId: 730,
         name: "CS:GO",
         isSingleplayer: false
       },
       detail3: {
-        gameId: 0,
-        url: "https://steamcdn-a.akamaihd.net/steam/apps/945360/capsule_616x353.jpg?t=1605831017",
-        name: "Among Us",
+        gameId: 945360,
+        name: "Among_Us",
         isSingleplayer: false
       },
       detail4: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail5: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail6: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail7: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail8: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail9: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       },
       detail10: {
         gameId: 0,
-        url: "",
         name: "default",
         isSingleplayer: false
       }
@@ -85,115 +76,135 @@ class HomeContent extends Component {
       <div className="content">
 
         <div className="cardWrap">
-          <h1>Multiplayer Games</h1>
+          <h1>Here are your recommended games!</h1>
             <div className="cardContainer">
               {/*game1*/}
-              <div className="card">
-                <div className="cardImg">
-                  <img src= {this.state.detail1.url}
-                    alt = "Dota2 Pic"/>
+              <Link to={"//store.steampowered.com/app/" + this.state.detail1.gameId}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail1.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                      alt = {this.state.detail1.name + " Pic"}/>
+                  </div>
+                  <div className="cardContent">
+                    <h3>{this.state.detail1.name}</h3>
+                  </div>
                 </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail1.name}</h3>
-                </div>
-              </div>
+              </Link>
               {/*game2*/}
+              <Link to={"//store.steampowered.com/app/" + this.state.detail2.gameId}>
               <div className="card">
                 <div className="cardImg">
-                  <img src= {this.state.detail2.url}
-                    alt = "Dota2 Pic"/>
+                  <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail2.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail2.name + " Pic"}/>
                 </div>
                 <div className="cardContent">
                   <h3>{this.state.detail2.name}</h3>
                 </div>
               </div>
+              </Link>
               {/*game3*/}
-              <div className="card">
-                <div className="cardImg">
-                  <img src={this.state.detail3.url}
-                    alt = "Dota2 Pic"/>
+              <Link to={"//store.steampowered.com/app/" + this.state.detail3.gameId}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail3.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                      alt = {this.state.detail3.name + " Pic"}/>
+                  </div>
+                  <div className="cardContent">
+                    <h3>{this.state.detail3.name}</h3>
+                  </div>
                 </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail3.name}</h3>
-                </div>
-              </div>
+              </Link>
               {/*game4*/}
-              <div className="card">
-                <div className="cardImg">
-                  <img src={this.state.detail4.url}
-                    alt = "Dota2 Pic"/>
+              <Link to={"//store.steampowered.com/app/" + this.state.detail4.gameId}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail4.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                      alt = {this.state.detail4.name + " Pic"}/>
+                  </div>
+                  <div className="cardContent">
+                    <h3>{this.state.detail4.name}</h3>
+                  </div>
                 </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail4.name}</h3>
-                </div>
-              </div>
+              </Link>
               {/*game5*/}
-              <div className="card">
-                <div className="cardImg">
-                  <img src={this.state.detail5.url}
-                    alt = "Dota2 Pic"/>
+              <Link to={"//store.steampowered.com/app/" + this.state.detail5.gameId}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail5.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                      alt = {this.state.detail5.name + " Pic"}/>
+                  </div>
+                  <div className="cardContent">
+                    <h3>{this.state.detail5.name}</h3>
+                  </div>
                 </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail5.name}</h3>
-                </div>
-              </div>
-            </div>
+              </Link>
+          </div>
         </div>
 
 
         <div className="cardWrap">
-          <h2>Singleplayer Games</h2>
+          <h2></h2>
           <div className="cardContainer">
-            <div className="card">
-              <div className="cardImg">
-                <img src={this.state.detail6.url}
-                  alt = "Dota2 Pic"
-                  />
+            <Link to={"//store.steampowered.com/app/" + this.state.detail6.gameId}>
+              <div className="card">
+                <div className="cardImg">
+                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail6.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail6.name + " Pic"}
+                    />
+                </div>
+                <div className="cardContent">
+                  <h3>{this.state.detail6.name}</h3>
+                </div>
               </div>
-              <div className="cardContent">
-                <h3>{this.state.detail6.name}</h3>
+            </Link>
+            <Link to={"//store.steampowered.com/app/" + this.state.detail7.gameId}>
+              <div className="card">
+                <div className="cardImg">
+                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail7.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail7.name + " Pic"}
+                    />
+                </div>
+                <div className="cardContent">
+                  <h3>{this.state.detail7.name}</h3>
+                </div>
               </div>
-            </div>
-            <div className="card">
-              <div className="cardImg">
-                <img src={this.state.detail7.url}
-                  alt = "Dota2 Pic"
-                  />
+            </Link>
+            <Link to={"//store.steampowered.com/app/" + this.state.detail8.gameId}>
+              <div className="card">
+                <div className="cardImg">
+                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail8.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail8.name + " Pic"}
+                    />
+                </div>
+                <div className="cardContent">
+                  <h3>{this.state.detail8.name}</h3>
+                </div>
               </div>
-              <div className="cardContent">
-                <h3>{this.state.detail7.name}</h3>
+            </Link>
+            <Link to={"//store.steampowered.com/app/" + this.state.detail9.gameId}>
+              <div className="card">
+                <div className="cardImg">
+                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail9.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail9.name + " Pic"}
+                    />
+                </div>
+                <div className="cardContent">
+                  <h3>{this.state.detail9.name}</h3>
+                </div>
               </div>
-            </div>
-            <div className="card">
-              <div className="cardImg">
-                <img src={this.state.detail8.url}
-                  alt = "Dota2 Pic"
-                  />
+            </Link>
+            <Link to={"//store.steampowered.com/app/" + this.state.detail10.gameId}>
+              <div className="card">
+                <div className="cardImg">
+                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail10.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    alt = {this.state.detail10.name + " Pic"}
+                    />
+                </div>
+                <div className="cardContent">
+                  <h3>{this.state.detail10.name}</h3>
+                </div>
               </div>
-              <div className="cardContent">
-                <h3>{this.state.detail8.name}</h3>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardImg">
-                <img src={this.state.detail9.url}
-                  alt = "Dota2 Pic"
-                  />
-              </div>
-              <div className="cardContent">
-                <h3>{this.state.detail9.name}</h3>
-              </div>
-            </div>
-            <div className="card">
-              <div className="cardImg">
-                <img src={this.state.detail10.url}
-                  alt = "Dota2 Pic"
-                  />
-              </div>
-              <div className="cardContent">
-                <h3>{this.state.detail10.name}</h3>
-              </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
