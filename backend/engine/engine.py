@@ -68,12 +68,12 @@ class Engine:
 
             dist = genreDistance + developerDistance # Compute weighted distance.
 
-            distances.append((dist, game[0])) # Insert tuple of distance calculation and gameId to distances list.
+            distances.append((dist, game[3], game[2])) # Insert tuple of distance calculation, steamId, and game name.
 
         distances.sort(key=lambda tup: tup[0]) # Sort array based on distance.
-        recommendedIds = [x[1] for x in distances] # Extract only the gameIds.
+        recommendedIds = [(x[1], x[2]) for x in distances] # Extract only the steamId and game name.
 
-        return recommendedIds[:self.k] # Return the k gameIds with smallest distances.
+        return recommendedIds[:self.k] # Return the k steamIds and game names with smallest distances.
 
     def getRecommendations(self, userGameIds, userRatings):
         """Gets the recommended games for a user.
@@ -84,6 +84,10 @@ class Engine:
             Returns:
                 The list of recommended games.
         """
+
+        if not userGameIds:
+            # Return no recommendations if list of userGameIds is empyty.
+            return []
 
         # Sort userGameIds and userRatings based on userRatings in decreasing order.
         userGameIds, userRatings = (np.array(i) for i in zip(*sorted(zip(userGameIds, userRatings), reverse=True)))
@@ -97,8 +101,8 @@ class Engine:
             genreBinaryVector = self.getGenreBinaryVector(userGameIds[i])
             developerBinaryVector = self.getDeveloperBinaryVector(userGameIds[i])
             
-            userGameGenresVector += genreBinaryVector
-            userGameDevelopersVector += developerBinaryVector
+            userGameGenresVector += 0.1 * userRatings[i] * genreBinaryVector # Compute weighted genres vector
+            userGameDevelopersVector += 0.1 * userRatings[i] * developerBinaryVector # Compute weighted developers vector
 
         return self.kNearestNeighbors(userGameIds, userGameGenresVector, userGameDevelopersVector)
         
@@ -193,9 +197,11 @@ def cosineDistance(u, v):
 
 def main():
     # Main method is for testing purposes only
+
     engine = Engine(5)
-    print(engine.getRecommendations([523], [10])) # Try FIFA 20
-    print()
-    print(engine.getRecommendations([523, 87], [10, 10])) # Try FIFA 20 and Call of Duty: WWII
+    print(engine.getRecommendations([487], [10])) # Try FIFA 20.
+    print(engine.getRecommendations([487, 81], [10, 10])) # Try FIFA 20 and Call of Duty: WWII.
+    print(engine.getRecommendations([487, 81], [5, 10])) # Try FIFA 20 and Call of Duty: WWII with low rating for FIFA 20.
+    print(engine.getRecommendations([487, 81, 565], [10, 10, 10])) # Try FIFA 20, Call of Duty: WWII, and Need for Speed Heat.
 
 if __name__ == "__main__":main()
