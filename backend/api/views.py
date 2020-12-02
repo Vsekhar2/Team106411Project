@@ -158,6 +158,36 @@ def gamePopulate(request):
 
     return Response("Parse complete")
 
+@api_view(['GET'])
+def getGameList(request):
+    cursor = connection.cursor()
+    cursor.execute("SELECT id, name FROM game")
+    rows = cursor.fetchall()
+    retList = []
+    for row in rows:
+        retList.append(row)
+    return Response(retList)
+
+@api_view(['POST'])
+def putExperience(request):
+    data = json.loads(request.body)
+    name = data['Name']
+    age = data['Age']
+    experienceList = data['ExperienceList']
+    print(data)
+    newUser = User(name=name, age=age)
+    newUser.save()
+
+    userId = newUser.pk
+
+    for exp in experienceList:
+        gameId = exp['currGameId']
+        gameRating = exp['currRating']
+        cursor = connection.cursor()
+        rawSql = "INSERT INTO experience(user_id, game_id, rating) VALUES(%s, %s, %s)" % (userId, gameId, gameRating)
+        cursor.execute(rawSql)
+    return Response("Put Experience Complete")
+
 @api_view(['POST'])
 def userRecommendations(request):
     data = json.loads(request.body)
