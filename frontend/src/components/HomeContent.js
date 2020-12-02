@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+
+let myData = null;
 
 class HomeContent extends Component {
 
@@ -62,11 +65,90 @@ class HomeContent extends Component {
     };
   }
 
-  updateURL = fields => {
+  // should call api to access MongoDB database, pull user recommendations
+  onInput = (e) => {
 
-    console.log("App Component got: ", fields);
+    //Calling Reccomendation Engine
+    let userID = JSON.stringify(this.state)
+    var reccomendationArray = new Array(4)
 
-  }
+    axios.post("http://127.0.0.1:8000/api/user-recommendations/", userID)
+      .then((response) => {
+         console.log("Returned response from Django: " + response.data)
+
+
+          var steamId1 = response.data[0][0]
+          var steamId2 = response.data[1][0]
+          var steamId3 = response.data[2][0]
+          var steamId4 = response.data[3][0]
+          var steamId5 = response.data[4][0]
+
+          var gameName1 = response.data[0][1]
+          var gameName2 = response.data[1][1]
+          var gameName3 = response.data[2][1]
+          var gameName4 = response.data[3][1]
+          var gameName5 = response.data[4][1]
+
+
+         //console.log(tempData)
+         myData = JSON.stringify(response.data)
+         this.setState({
+		 	steamId1 : steamId1,
+		 	steamId2 : steamId2,
+		 	steamId3 : steamId3,
+		 	steamId4 : steamId4,
+		 	steamId5 : steamId5,
+
+			gameName1 : gameName1,
+			gameName2 : gameName2,
+			gameName3 : gameName3,
+			gameName4 : gameName4,
+			gameName5 : gameName5,
+
+         })
+         console.log(myData)
+         console.log(myData[0])
+    })
+    .catch((error) => {
+        console.log(error)
+     })
+
+ };
+
+ PushToMongo = (e) => {
+
+   //Post Reccomendation Results into MongoDB
+   console.log(this.state.myReccomendationOne)
+
+   /*var data = JSON.stringify({"tags":[this.state.steamId1, this.state.steamId2, this.state.steamId3, this.state.steamId4, this.state.steamId5],"firstName":"Joseph","lastName":"Test"});*/
+
+	var data = JSON.stringify(
+		{ 	"userId" : this.state.UserId,
+			"gameNames":[this.state.gameName1, this.state.gameName2, this.state.gameName3, this.state.gameName4, this.state.gameName5],
+			"steamIds":[this.state.steamId1, this.state.steamId2, this.state.steamId3, this.state.steamId4, this.state.steamId5]
+		});
+
+   var config = {
+     method: 'post',
+     url: 'http://localhost:4000/API/userModel',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+     data : data
+   };
+
+
+   axios(config)
+   .then(function (response) {
+     console.log(JSON.stringify(response.data));
+   })
+   .catch(function (error) {
+     console.log(error);
+   });
+
+
+};
+
   //getGameId, function should pull gameID, name, and single/Multiplayer
   //updateURL, generate url by concanating "https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.gameID + /capsule_616x353.jpg?t=1605831017"
 
@@ -74,67 +156,110 @@ class HomeContent extends Component {
 
     return (
       <div className="content">
+        <br />
+
+               <input
+               placeholder = "UserId: "
+               value = {this.state.UserId}
+               onChange={e => this.setState({UserId: e.target.value}, () => 
+                    { this.setState({ 
+                            detail1 : { 
+                                        name : this.state.gameName1,
+                                        gameId : this.state.steamId1
+                                      }
+                                    }) 
+                    })
+                }
+
+                />
+                <button onClick={e => this.onInput(e)}>Login</button>
+                <button onClick={e => this.PushToMongo(e)}>Show Results</button>
+                <div className="login"></div>
+                <div>
+
+                    {this.state.gameName1}
+                    <br />
+                    {this.state.gameName2}
+                    <br />
+                    {this.state.gameName3}
+                    <br />
+                    {this.state.gameName4}
+                    <br />
+                    {this.state.gameName5}
+
+                    <br />
+                    {this.state.steamId1}
+                    <br />
+                    {this.state.steamId2}
+                    <br />
+                    {this.state.steamId3}
+                    <br />
+                    {this.state.steamId4}
+                    <br />
+                    {this.state.steamId5}
+
+                </div>
 
         <div className="cardWrap">
           <h1>Here are your recommended games!</h1>
             <div className="cardContainer">
               {/*game1*/}
-              <Link to={"//store.steampowered.com/app/" + this.state.detail1.gameId}>
+              <Link to={"//store.steampowered.com/app/" + this.state.steamId1}>
                 <div className="card">
                   <div className="cardImg">
-                    <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail1.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId1 + "/capsule_616x353.jpg?t=1605831017"}
                       alt = {this.state.detail1.name + " Pic"}/>
                   </div>
                   <div className="cardContent">
-                    <h3>{this.state.detail1.name}</h3>
+                    <h3>{this.state.gameName1}</h3>
                   </div>
                 </div>
               </Link>
               {/*game2*/}
-              <Link to={"//store.steampowered.com/app/" + this.state.detail2.gameId}>
+              <Link to={"//store.steampowered.com/app/" + this.state.steamId2}>
               <div className="card">
                 <div className="cardImg">
-                  <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail2.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                  <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId2 + "/capsule_616x353.jpg?t=1605831017"}
                     alt = {this.state.detail2.name + " Pic"}/>
                 </div>
                 <div className="cardContent">
-                  <h3>{this.state.detail2.name}</h3>
+                  <h3>{this.state.gameName2}</h3>
                 </div>
               </div>
               </Link>
               {/*game3*/}
-              <Link to={"//store.steampowered.com/app/" + this.state.detail3.gameId}>
+              <Link to={"//store.steampowered.com/app/" + this.state.steamId3}>
                 <div className="card">
                   <div className="cardImg">
-                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail3.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId3 + "/capsule_616x353.jpg?t=1605831017"}
                       alt = {this.state.detail3.name + " Pic"}/>
                   </div>
                   <div className="cardContent">
-                    <h3>{this.state.detail3.name}</h3>
+                    <h3>{this.state.gameName3}</h3>
                   </div>
                 </div>
               </Link>
               {/*game4*/}
-              <Link to={"//store.steampowered.com/app/" + this.state.detail4.gameId}>
+              <Link to={"//store.steampowered.com/app/" + this.state.steamId4}>
                 <div className="card">
                   <div className="cardImg">
-                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail4.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId4 + "/capsule_616x353.jpg?t=1605831017"}
                       alt = {this.state.detail4.name + " Pic"}/>
                   </div>
                   <div className="cardContent">
-                    <h3>{this.state.detail4.name}</h3>
+                    <h3>{this.state.gameName4}</h3>
                   </div>
                 </div>
               </Link>
               {/*game5*/}
-              <Link to={"//store.steampowered.com/app/" + this.state.detail5.gameId}>
+              <Link to={"//store.steampowered.com/app/" + this.state.steamId5}>
                 <div className="card">
                   <div className="cardImg">
-                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail5.gameId + "/capsule_616x353.jpg?t=1605831017"}
+                    <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId5 + "/capsule_616x353.jpg?t=1605831017"}
                       alt = {this.state.detail5.name + " Pic"}/>
                   </div>
                   <div className="cardContent">
-                    <h3>{this.state.detail5.name}</h3>
+                    <h3>{this.state.gameName5}</h3>
                   </div>
                 </div>
               </Link>
