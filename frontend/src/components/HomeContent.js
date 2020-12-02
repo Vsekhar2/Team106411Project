@@ -148,15 +148,10 @@ class HomeContent extends Component {
 };
 
     searchUser = (e) => {
-     e.preventDefault();
-     //this.props.onSubmit(this.state)
-     console.log(this.state);
-
-      let sendData = JSON.stringify({ "userId" : "1" })
-      console.log(sendData);
+      var sendData = JSON.stringify({ "userId" : this.state.UserId });
       var config = {
-           method: 'get',
-           url: 'http://localhost:4000/API/userModel',
+           method: 'post',
+           url: 'http://localhost:4000/API/userModel/query',
            headers: {
              'Content-Type': 'application/json'
            },
