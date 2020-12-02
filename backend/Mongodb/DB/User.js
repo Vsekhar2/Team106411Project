@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 const user = new mongoose.Schema({
 
-  firstName: {
-    type: String
-  },
-  lastName: {
+	userId: {
+		type: Number
+	},
 
-    type:String
+	gameNames: [{
+		type: String
+	}],
 
-  },
-  tags: [{
-    type: Number
-  }]
+	steamIds: [{
+		type: Number
+	}]
 
 
 });

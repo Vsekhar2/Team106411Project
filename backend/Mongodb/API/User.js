@@ -5,17 +5,15 @@ const route = express.Router();
 
 route.post('/', async (req, res) => {
 
-    const { firstName, lastName, tags } = req.body;
+    const { userId, gameNames, steamIds } = req.body;
     let user = {};
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.tags = tags;
+    user.userId = userId;
+    user.gameNames = gameNames;
+    user.steamIds = steamIds;
 
     let userModel = new User(user);
     await userModel.save();
     res.json(userModel);
-
-
 
 });
 
@@ -44,10 +42,6 @@ route.get('/', async (req, res) => {
         })
 
     })
-
-
-
-
 
 
 })

@@ -6,6 +6,6 @@ connectDB();
 
 app.use(express.json({ extended: false }));
 app.use('/API/userModel', require('./API/User'))
-const Port = process.env.Port || 6000;
+const Port = process.env.Port || 4000 ;
 
 app.listen(Port, ()=>console.log('Server Started'));
