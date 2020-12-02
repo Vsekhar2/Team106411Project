@@ -9,14 +9,10 @@ export default class User extends React.Component {
 
    //Data that will be stored in the form and can be used
    state = {
-
      Name: "",
      Age: "",
      UserId: "",
      test: myData
-
-
-
    }
 
    //On Insert Function
@@ -35,8 +31,6 @@ export default class User extends React.Component {
 
       console.log("App Component got: ", this.state);
 
-
-
       //this.props.onSubmit(this.state);
       this.setState({
 
@@ -47,7 +41,6 @@ export default class User extends React.Component {
 
       })
       console.log(this.state);
-
 
    };
 
@@ -78,10 +71,6 @@ export default class User extends React.Component {
 
        })
      console.log("Deleted specific userId: ", this.state);
-
-
-
-
    };
 
    //On Update Function
@@ -107,14 +96,9 @@ export default class User extends React.Component {
          Age: "",
          UserId: ""
 
-
        })
 
      console.log("Updated specific userId: ", this.state);
-
-
-
-
    };
 
 
@@ -125,7 +109,6 @@ export default class User extends React.Component {
      e.preventDefault();
      //this.props.onSubmit(this.state)
      console.log(this.state);
-
 
       let sendData = JSON.stringify(this.state)
       //let responseData = null
@@ -149,14 +132,9 @@ export default class User extends React.Component {
          Age: "",
          UserId: "",
 
-
-
        })
 
      console.log("Query Success: ");
-
-
-
 
    };
 

@@ -5,21 +5,17 @@ let myData = null;
 export default class Experience extends React.Component {
   //Data that will be stored in the form and can be used
   state = {
-
     GameId: "",
     Name: "",
     Price: "",
     Platform: "",
     Developer: "",
     Query: myData
-
   }
 
   //On Insert Function
   onInsert = (e) => {
      e.preventDefault();
-
-
      let sendData = JSON.stringify(this.state)
      axios.post("http://127.0.0.1:8000/api/game-insert/", sendData)
        .then((response) => {
@@ -28,7 +24,6 @@ export default class Experience extends React.Component {
        .catch((error) => {
            console.log(error)
        })
-
      console.log("App Component got: ", this.state);
 
 
@@ -54,7 +49,6 @@ export default class Experience extends React.Component {
     e.preventDefault();
     console.log(this.state);
 
-
      let sendData = JSON.stringify(this.state)
      axios.post("http://127.0.0.1:8000/api/game-update/", sendData)
        .then((response) => {
@@ -75,10 +69,6 @@ export default class Experience extends React.Component {
       })
 
     console.log("Deleted specific game: ", this.state);
-
-
-
-
   };
 
   //On Query Function
@@ -87,7 +77,6 @@ export default class Experience extends React.Component {
     e.preventDefault();
     //this.props.onSubmit(this.state)
     console.log(this.state);
-
 
      let sendData = JSON.stringify(this.state)
      axios.post("http://127.0.0.1:8000/api/game-query/", sendData)
@@ -115,10 +104,6 @@ export default class Experience extends React.Component {
       })
 
     console.log("Queried game: ", this.state);
-
-
-
-
   };
 
 

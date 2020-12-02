@@ -11,15 +11,12 @@ export default class Experience extends React.Component {
     GameId: "",
     Ratings: "",
     myQueryData: myData,
-
-
-
+    
   }
 
   //On Insert Function
   onInsert = (e) => {
      e.preventDefault();
-
 
      let sendData = JSON.stringify(this.state)
      axios.post("http://127.0.0.1:8000/api/experience-insert/", sendData)
@@ -32,8 +29,6 @@ export default class Experience extends React.Component {
 
      console.log("App Component got: ", this.state);
 
-
-
      //this.props.onSubmit(this.state);
      this.setState({
 
@@ -41,10 +36,8 @@ export default class Experience extends React.Component {
        GameId: "",
        Ratings: ""
 
-
      })
      console.log(this.state);
-
 
   };
 
@@ -66,20 +59,15 @@ export default class Experience extends React.Component {
          console.log(error)
       })
 
-
       this.setState({
 
         UserId: "",
         GameId: "",
         Ratings: ""
 
-
       })
 
     console.log("Deleted specific userId: ", this.state);
-
-
-
 
   };
 
@@ -105,13 +93,9 @@ export default class Experience extends React.Component {
         GameId: "",
         Ratings: ""
 
-
       })
 
     console.log("Deleted specific userId: ", this.state);
-
-
-
 
   };
 
@@ -143,17 +127,11 @@ export default class Experience extends React.Component {
         GameId: "",
         Ratings: ""
 
-
       })
 
     console.log("Queried specific userId: ", this.state);
 
-
-
-
   };
-
-
 
   render() {
 

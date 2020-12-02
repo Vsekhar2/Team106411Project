@@ -105,10 +105,21 @@
   }
 }
 
+.SearchContent {
+  color: white;
+  padding-left: 2rem;
+  h3 {
+    color: white;
+  }
+}
+
 .SurveyContent {
   color: white;
   padding-left: 2rem;
   h3 {
+    color: white;
+  }
+  h2 {
     color: white;
   }
 }
@@ -119,6 +130,54 @@
     font-size: 1rem;
     color: white;
   }
+}
+
+.inputBar {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.inputBarExperience {
+  width: 80%;
+  float:left;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.float-left {
+  float:left;
+  width: 50%; // or 33% for equal width independent of parent width
+}
+
+.experienceRow {
+  width: 60%;
+  padding: auto;
+}
+
+.surveyButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.surveyButton:hover {
+  opacity: 0.8;
+}
+
+.experienceLabel {
+  float: left
 }
 // .login {
 //   position: fixed;
