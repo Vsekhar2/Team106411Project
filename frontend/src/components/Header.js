@@ -98,29 +98,6 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className="Header">
-      <br />
-
-       <input
-       placeholder = "UserId: "
-       value = {this.state.UserId}
-       onChange={e => this.setState({UserId: e.target.value})}
-        />
-        <button onClick={e => this.onInput(e)}>Login</button>
-        <button onClick={e => this.PushToMongo(e)}>Show Results</button>
-        <div className="login"></div>
-        <div>
-
-            {this.state.gameName1}
-            <br />
-            {this.state.gameName2}
-            <br />
-            {this.state.gameName3}
-            <br />
-            {this.state.gameName4}
-            <br />
-            {this.state.gameName5}
-
-        </div>
       </div>
     )
   }

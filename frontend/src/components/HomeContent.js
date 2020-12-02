@@ -176,28 +176,7 @@ class HomeContent extends Component {
                 <button onClick={e => this.PushToMongo(e)}>Show Results</button>
                 <div className="login"></div>
                 <div>
-
-                    {this.state.gameName1}
-                    <br />
-                    {this.state.gameName2}
-                    <br />
-                    {this.state.gameName3}
-                    <br />
-                    {this.state.gameName4}
-                    <br />
-                    {this.state.gameName5}
-
-                    <br />
-                    {this.state.steamId1}
-                    <br />
-                    {this.state.steamId2}
-                    <br />
-                    {this.state.steamId3}
-                    <br />
-                    {this.state.steamId4}
-                    <br />
-                    {this.state.steamId5}
-
+                <h3>---------------------------------------------------</h3>
                 </div>
 
         <div className="cardWrap">
@@ -268,7 +247,7 @@ class HomeContent extends Component {
 
 
 
-        
+
       </div>
     )
   }
