@@ -152,9 +152,9 @@ class HomeContent extends Component {
      //this.props.onSubmit(this.state)
      console.log(this.state);
 
-      let sendData = JSON.stringify({ "userId" : this.state.UserId })
+      let sendData = JSON.stringify({ "userId" : "1" })
       console.log(sendData);
-      var config2 = {
+      var config = {
            method: 'get',
            url: 'http://localhost:4000/API/userModel',
            headers: {
@@ -163,7 +163,7 @@ class HomeContent extends Component {
            data : sendData
         };
            
-       axios(config2)
+       axios(config)
        .then(function (response) {
          console.log(JSON.stringify(response.data));
        })
