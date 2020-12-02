@@ -118,9 +118,7 @@ class HomeContent extends Component {
  PushToMongo = (e) => {
 
    //Post Reccomendation Results into MongoDB
-   console.log(this.state.myReccomendationOne)
-
-   /*var data = JSON.stringify({"tags":[this.state.steamId1, this.state.steamId2, this.state.steamId3, this.state.steamId4, this.state.steamId5],"firstName":"Joseph","lastName":"Test"});*/
+   console.log(this.state.gameName1)
 
 	var data = JSON.stringify(
 		{ 	"userId" : this.state.UserId,
@@ -149,6 +147,33 @@ class HomeContent extends Component {
 
 };
 
+    searchUser = (e) => {
+     e.preventDefault();
+     //this.props.onSubmit(this.state)
+     console.log(this.state);
+
+      let sendData = JSON.stringify({ "userId" : this.state.UserId })
+      console.log(sendData);
+      var config2 = {
+           method: 'get',
+           url: 'http://localhost:4000/API/userModel',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           data : sendData
+        };
+           
+       axios(config2)
+       .then(function (response) {
+         console.log(JSON.stringify(response.data));
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+         console.log("Query Success: ");
+
+    }
+
   //getGameId, function should pull gameID, name, and single/Multiplayer
   //updateURL, generate url by concanating "https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.gameID + /capsule_616x353.jpg?t=1605831017"
 
@@ -172,8 +197,9 @@ class HomeContent extends Component {
                 }
 
                 />
-                <button onClick={e => this.onInput(e)}>Login</button>
-                <button onClick={e => this.PushToMongo(e)}>Show Results</button>
+                <button onClick={e => this.onInput(e)}>Get Recommendations</button>
+                <button onClick={e => this.PushToMongo(e)}>Save Results</button>
+                <button onClick={e => this.searchUser(e)}>Search User</button>
                 <div className="login"></div>
                 <div>
                 <h3>---------------------------------------------------</h3>
@@ -187,7 +213,7 @@ class HomeContent extends Component {
                 <div className="card">
                   <div className="cardImg">
                     <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId1 + "/capsule_616x353.jpg?t=1605831017"}
-                      alt = {this.state.detail1.name + " Pic"}/>
+                      alt = {this.state.gameName1+ " Pic"}/>
                   </div>
                   <div className="cardContent">
                     <h3>{this.state.gameName1}</h3>
@@ -199,7 +225,7 @@ class HomeContent extends Component {
               <div className="card">
                 <div className="cardImg">
                   <img src= {"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId2 + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail2.name + " Pic"}/>
+                    alt = {this.state.gameName2 + " Pic"}/>
                 </div>
                 <div className="cardContent">
                   <h3>{this.state.gameName2}</h3>
@@ -211,7 +237,7 @@ class HomeContent extends Component {
                 <div className="card">
                   <div className="cardImg">
                     <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId3 + "/capsule_616x353.jpg?t=1605831017"}
-                      alt = {this.state.detail3.name + " Pic"}/>
+                      alt = {this.state.gameName3 + " Pic"}/>
                   </div>
                   <div className="cardContent">
                     <h3>{this.state.gameName3}</h3>
@@ -223,7 +249,7 @@ class HomeContent extends Component {
                 <div className="card">
                   <div className="cardImg">
                     <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId4 + "/capsule_616x353.jpg?t=1605831017"}
-                      alt = {this.state.detail4.name + " Pic"}/>
+                      alt = {this.state.gameName4 + " Pic"}/>
                   </div>
                   <div className="cardContent">
                     <h3>{this.state.gameName4}</h3>
@@ -235,7 +261,7 @@ class HomeContent extends Component {
                 <div className="card">
                   <div className="cardImg">
                     <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.steamId5 + "/capsule_616x353.jpg?t=1605831017"}
-                      alt = {this.state.detail5.name + " Pic"}/>
+                      alt = {this.state.gameName5 + " Pic"}/>
                   </div>
                   <div className="cardContent">
                     <h3>{this.state.gameName5}</h3>

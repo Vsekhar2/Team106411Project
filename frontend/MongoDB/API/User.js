@@ -19,8 +19,8 @@ route.post('/', async (req, res) => {
 
 route.get('/', async (req, res) => {
 
-
-    User.find()
+    const {userId} = req.body;
+    User.findOne({userId: userId}, {_id: 0, steamIds: 0, _v: 0, userId: 0})
     .then(profiles => {
 
         res.json({
