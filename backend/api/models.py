@@ -27,7 +27,7 @@ class Game_Platform(models.Model):
 class Experience(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     game = models.ForeignKey(Game, on_delete = models.CASCADE)
-    rating = models.DecimalField('Rating', max_digits=4, decimal_places=2)
+    rating = models.IntegerField('Rating', null=False)
 
     class Meta:
         db_table = 'experience'
