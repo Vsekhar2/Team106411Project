@@ -8,32 +8,9 @@ export default class Header extends React.Component {
     userId: ""
   }
 
+  // should call api to access MongoDB database, pull user recommendations
   onInput = (e) => {
-    console.log("UserID Selected")
-    e.preventDefault();
-    console.log(this.state);
-
-    //add API to send userName to build out mainpage
-    let sendData = JSON.stringify(this.state)
-    axios.post("", sendData)
-      .then((response) => {
-         console.log("Returned response from Django: " + response.data)
-         myData = JSON.stringify(response.data)
-         this.setState({
-
-           myUserData: myData
-         })
-    })
-    .catch((error) => {
-        console.log(error)
-     })
-
-     this.setState({
-
-       UserId: "",
-     })
-
-   console.log("Select UserID ", this.state);
+    // pythonProcess.stdout.on('data', (data));
  };
 
 

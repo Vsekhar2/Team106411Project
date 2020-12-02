@@ -68,11 +68,12 @@ class Engine:
 
             dist = genreDistance + developerDistance # Compute weighted distance.
 
-            distances.append((dist, game[2])) # Insert tuple of distance calculation and name of game to distances list.
+            distances.append((dist, game[0])) # Insert tuple of distance calculation and gameId to distances list.
 
         distances.sort(key=lambda tup: tup[0]) # Sort array based on distance.
+        recommendedIds = [x[1] for x in distances] # Extract only the gameIds.
 
-        return distances[:self.k] # Return the k smallest distances.
+        return recommendedIds[:self.k] # Return the k gameIds with smallest distances.
 
     def getRecommendations(self, userGameIds, userRatings):
         """Gets the recommended games for a user.
