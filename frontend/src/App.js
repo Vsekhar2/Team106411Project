@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.scss';
+import 'semantic-ui-css/semantic.min.css'
 import Main from './components/Main';
 import NavBar from './components/NavBar';
 

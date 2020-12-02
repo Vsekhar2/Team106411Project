@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
 	path('', views.apiOverview, name="api-overview"),
 	path('game-populate/', views.gamePopulate, name="game-populate"),
+	path('get-gamelist/', views.getGameList, name="get-gamelist"),
+	path('put-experience/', views.putExperience, name="put-experience"),
     path('user-recommendations/', views.userRecommendations, name="user-recommendations"),
 	path('user-insert/', views.userInsert, name="user-insert"),
 	path('user-delete/', views.userDelete, name="user-delete"),
