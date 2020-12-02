@@ -161,13 +161,13 @@ class HomeContent extends Component {
                <input
                placeholder = "UserId: "
                value = {this.state.UserId}
-               onChange={e => this.setState({UserId: e.target.value}, () => 
-                    { this.setState({ 
-                            detail1 : { 
+               onChange={e => this.setState({UserId: e.target.value}, () =>
+                    { this.setState({
+                            detail1 : {
                                         name : this.state.gameName1,
                                         gameId : this.state.steamId1
                                       }
-                                    }) 
+                                    })
                     })
                 }
 
@@ -267,71 +267,8 @@ class HomeContent extends Component {
         </div>
 
 
-        <div className="cardWrap">
-          <h2></h2>
-          <div className="cardContainer">
-            <Link to={"//store.steampowered.com/app/" + this.state.detail6.gameId}>
-              <div className="card">
-                <div className="cardImg">
-                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail6.gameId + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail6.name + " Pic"}
-                    />
-                </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail6.name}</h3>
-                </div>
-              </div>
-            </Link>
-            <Link to={"//store.steampowered.com/app/" + this.state.detail7.gameId}>
-              <div className="card">
-                <div className="cardImg">
-                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail7.gameId + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail7.name + " Pic"}
-                    />
-                </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail7.name}</h3>
-                </div>
-              </div>
-            </Link>
-            <Link to={"//store.steampowered.com/app/" + this.state.detail8.gameId}>
-              <div className="card">
-                <div className="cardImg">
-                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail8.gameId + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail8.name + " Pic"}
-                    />
-                </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail8.name}</h3>
-                </div>
-              </div>
-            </Link>
-            <Link to={"//store.steampowered.com/app/" + this.state.detail9.gameId}>
-              <div className="card">
-                <div className="cardImg">
-                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail9.gameId + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail9.name + " Pic"}
-                    />
-                </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail9.name}</h3>
-                </div>
-              </div>
-            </Link>
-            <Link to={"//store.steampowered.com/app/" + this.state.detail10.gameId}>
-              <div className="card">
-                <div className="cardImg">
-                  <img src={"https://steamcdn-a.akamaihd.net/steam/apps/" + this.state.detail10.gameId + "/capsule_616x353.jpg?t=1605831017"}
-                    alt = {this.state.detail10.name + " Pic"}
-                    />
-                </div>
-                <div className="cardContent">
-                  <h3>{this.state.detail10.name}</h3>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
+
+        
       </div>
     )
   }
