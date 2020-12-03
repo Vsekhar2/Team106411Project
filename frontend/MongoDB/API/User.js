@@ -20,13 +20,11 @@ route.post('/', async (req, res) => {
 route.post('/query', async (req, res) => {
 
     var userIdInput = req.body['userId'];
-    console.log(userIdInput);
     User.findOne({userId: userIdInput}, {_id: 0, steamIds: 0, _v: 0, userId: 0})
     .then(profiles => {
 
         res.json({
 
-          confimation: 'success',
           data: profiles
 
         })
